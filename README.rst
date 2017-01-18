@@ -4,7 +4,7 @@
 Django Logging DLP Fork Test Project
 ====================================
 
-Django project used to test the DLP fork of django-logging-json
+Django project used to test the DLP fork of django-logging-json. https://github.com/dlparker/django-logging
 
 Setup
 ============
