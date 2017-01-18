@@ -2,15 +2,16 @@ import json
 from django.test import TestCase
 from django.test import Client
 from models import Counter
+from utils.logger_test import LogTestCase
 
-class HomeGetTest(TestCase):
+class HTTPOpsTest(TestCase):
 
-    def test_good_home_response(self):
+    def test_get_home_response(self):
         client = Client()
         response = client.get('/')
         self.assertEqual(response.status_code, 200)
 
-    def test_good_counter_response(self):
+    def test_get_counter_response(self):
         client = Client()
         try:
             db_counter = Counter.objects.get(name="main")
@@ -45,3 +46,13 @@ class HomeGetTest(TestCase):
         self.assertEqual(response.status_code, 200)
         res = json.loads(response.content)
         self.assertEqual(res['counter']['value'], db_counter.value + 1)
+
+class LogsCaptureTest(LogTestCase):
+
+    def test_get_home_logs(self):
+        client = Client()
+        with self.assertLogs('dl_logger', level='INFO') as cm:
+            response = client.get('/')
+        self.assertEqual(response.status_code, 200)
+        print cm.output
+        self.assertEqual(len(cm.output), 1)
