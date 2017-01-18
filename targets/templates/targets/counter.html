@@ -1,0 +1,17 @@
+{% extends "targets/base.html" %}
+{% block maincontent %}
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Counter value</h2>
+                <p>{{ counter.value }}
+
+                    <p><form method="post" action=".">
+                        {% csrf_token %}
+                        <button class="btn btn-default" role="button">Bump it &raquo;</butto>
+                    </form></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
