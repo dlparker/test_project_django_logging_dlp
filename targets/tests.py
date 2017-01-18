@@ -1,8 +1,14 @@
+from pprint import pprint
 import json
+
 from django.test import TestCase
 from django.test import Client
+
 from models import Counter
+
 from utils.logger_test import LogTestCase
+from utils.handlers import StreamMockHandler
+
 
 class HTTPOpsTest(TestCase):
 
@@ -54,5 +60,21 @@ class LogsCaptureTest(LogTestCase):
         with self.assertLogs('dl_logger', level='INFO') as cm:
             response = client.get('/')
         self.assertEqual(response.status_code, 200)
-        print cm.output
         self.assertEqual(len(cm.output), 1)
+
+class LogsAddHandlerTest(LogTestCase):
+
+    def test_get_home_logs(self):
+        client = Client()
+        StreamMockHandler.reset()
+        with self.assertLogs('dl_logger', level='INFO') as cm:
+            response = client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(cm.output), 1)
+        print('added stream_handler captured this record')
+        for rec in StreamMockHandler.get_records():
+            pprint(rec)
+            self.assertIsNotNone(rec['request'])
+            self.assertEqual(rec['request']['path'], '/')
+            self.assertIsNotNone(rec['response'])
+            self.assertEqual(rec['response']['status'], 200)

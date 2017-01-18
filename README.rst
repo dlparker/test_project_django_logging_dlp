@@ -22,6 +22,18 @@ Running tests
 
    (virtualenv) ./manage.py test targets
 
+Handler Override tests
+======================
+
+The full set of tests includes a test of an added handler. To test the feature
+of fully overriding the handlers defined by the library you can use the "replace_settings.py" file. To just test that one feature:
+
+.. code-block:: python
+
+   (virtualenv) ./manage.py test targets.tests.LogsAddHandlerTest --settings=test_server_django_logging.replace_settings
+
+
+
 Change Log
 ==================
 

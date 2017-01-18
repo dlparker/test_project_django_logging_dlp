@@ -127,17 +127,10 @@ LOGGING = {
 }
 
 DJANGO_LOGGING = {
-    "CONSOLE_LOG": True,
+    "CONSOLE_LOG": False,
     "SQL_LOG": False,
     "LOG_PATH": "/tmp/logs",
-    "EXTRA_FORMATTERS": [
-        {'name': 'stream_mock',
-         'config': {
-             'format': "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
-         }
-     }
-    ],
-    "EXTRA_HANDLERS": [
+    "OVERRIDE_HANDLERS": [
         {'name': 'stream_mock',
          'config': {
              'level': 'DEBUG',
