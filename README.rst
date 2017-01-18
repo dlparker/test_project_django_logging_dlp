@@ -36,7 +36,11 @@ of fully overriding the handlers defined by the library you can use the "replace
 
 Change Log
 ==================
+[2017-1-18] 15:30 CDT
 
-       [2017-1-18] 11:30 CDT
+Added integration and testing of django-loggin-json. Includes use of custom handler in both extra and override mode.
+
+
+[2017-1-18] 11:30 CDT
 
 Initial project with a few tests and no integration (or testing) of django-logging-json
